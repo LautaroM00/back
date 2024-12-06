@@ -9,19 +9,22 @@ const pool = mysql.createPool(
         user: ENVIROMENT.MYSQL.USERNAME ,
         password: ENVIROMENT.MYSQL.PASSWORD,
         database: ENVIROMENT.MYSQL.DATABASE,
-        connectionLimit: 10
-    }
+        connectionLimit: 1
+    },
 )
 
 pool.getConnection()
     .then(async (connection) => {
-        
-        await connection.query(`USE ${ENVIROMENT.MYSQL.DATABASE}`)
-        console.log('Conexión con MySQL exitosa y base de datos seleccionada')
-        connection.release()
+        try {
+            // Si ya has especificado la base de datos en la configuración del pool, no necesitas usar `USE`
+            await connection.query('SELECT 1'); // Ejecuta una consulta simple para verificar la conexión
+            console.log('Conexión con MySQL exitosa y base de datos seleccionada');
+        } catch (err) {
+            console.error('Error en la consulta: ', err);
+        } finally {
+            // Siempre libera la conexión
+            connection.release();
+        }
     })
-    .catch((err) => {
-        console.error('Error en la conexión: ', err)
-})
 
 export default pool

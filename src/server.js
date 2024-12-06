@@ -24,6 +24,10 @@ app.use("/api/cart", cartRouter)
 
 app.use(errorHandlerMiddleware);
 
+app.get('/ping', (req, res, next) => {
+  res.send('ok')
+})
+
 app.listen(PORT, () => {
   console.log(
     `El servidor está funcionando en la dirección http://localhost:${PORT}`

@@ -167,10 +167,11 @@ export const loginController = async (req, res, next) => {
             })
             .build()
 
-
+            
         return res.send(responseSuccess)
     }
     catch (error) {
+
         return next(new AppError(error.message, error.code))
     }
 }
