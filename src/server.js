@@ -15,12 +15,17 @@ import cartRouter from "./routes/cart.route.js";
 const app = express();
 const PORT = 7000;
 
-app.use(cors({
-  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
-}));
+const corsOptions = {
+  origin: [
+      'http://localhost:5173',  // Permitir el frontend en desarrollo
+      'https://tu-dominio-de-produccion.com',  // Permitir el frontend en producción (reemplaza con tu dominio)
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Encabezados permitidos
+  credentials: true,  // Permitir el envío de cookies o encabezados de autenticación
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
