@@ -15,13 +15,12 @@ import cartRouter from "./routes/cart.route.js";
 const app = express();
 const PORT = 7000;
 
-const corsOptions = {
-  origin: '*',  // Cambia esto si necesitas permitir otros orígenes
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'],  // Encabezados permitidos
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRouter);
