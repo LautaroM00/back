@@ -16,7 +16,7 @@ const app = express();
 const PORT = 7000;
 
 const corsOptions = {
-  origin: 'http://localhost:5173',  // Cambia esto si necesitas permitir otros orígenes
+  origin: '*',  // Cambia esto si necesitas permitir otros orígenes
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'],  // Encabezados permitidos
 };
