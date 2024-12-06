@@ -1,5 +1,6 @@
 import mysql from 'mysql2/promise'
 import ENVIROMENT from './enviroment.js'
+import { connection } from 'mongoose'
 
 
 
@@ -8,7 +9,8 @@ const pool = mysql.createPool(
         host: ENVIROMENT.MYSQL.HOST,
         user: ENVIROMENT.MYSQL.USERNAME ,
         password: ENVIROMENT.MYSQL.PASSWORD,
-        database: ENVIROMENT.MYSQL.DATABASE
+        database: ENVIROMENT.MYSQL.DATABASE,
+        connectionLimit: 10
     }
 )
 
