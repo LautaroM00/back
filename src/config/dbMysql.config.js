@@ -1,6 +1,5 @@
 import mysql from 'mysql2/promise'
 import ENVIROMENT from './enviroment.js'
-import { connection } from 'mongoose'
 
 
 
