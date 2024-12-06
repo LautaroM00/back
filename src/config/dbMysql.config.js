@@ -12,11 +12,15 @@ const pool = mysql.createPool(
     }
 )
 
-pool.getConnection().then((result) => {
-    console.log('Conexión con MySql exitosa')
-})
-.catch((err) => {
-    console.error('Error en la conexión: ', err)
+pool.getConnection()
+    .then(async (connection) => {
+        
+        await connection.query(`USE ${ENVIROMENT.MYSQL.DATABASE}`)
+        console.log('Conexión con MySQL exitosa y base de datos seleccionada')
+        connection.release()
+    })
+    .catch((err) => {
+        console.error('Error en la conexión: ', err)
 })
 
 export default pool
